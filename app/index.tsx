@@ -1,15 +1,52 @@
-import { Link } from "expo-router";
+import { View } from "react-native";
 
-import { ThemedText } from "@/presentation/shared/ThemedText";
+import {
+  animationMenuRoutes,
+  menuRoutes,
+  uiMenuRoutes,
+} from "@/constants/Routes";
+import { MenuItem } from "@/presentation/menu/MenuItem";
 import { ThemedView } from "@/presentation/shared/ThemedView";
 
 export default function ComponentsApp() {
   return (
     <ThemedView margin>
-      <ThemedText>ComponentsApp</ThemedText>
-      <Link className="dark:text-white " href="/animation-101">
-        Hola mundo
-      </Link>
+      {animationMenuRoutes.map((route, index) => (
+        <MenuItem
+          key={route.title}
+          title={route.title}
+          icon={route.icon}
+          name={route.name}
+          isFirst={index === 0}
+          isLast={index === animationMenuRoutes.length - 1}
+        />
+      ))}
+
+      <View className="my-3" />
+
+      {uiMenuRoutes.map((route, index) => (
+        <MenuItem
+          key={route.title}
+          title={route.title}
+          icon={route.icon}
+          name={route.name}
+          isFirst={index === 0}
+          isLast={index === uiMenuRoutes.length - 1}
+        />
+      ))}
+
+      <View className="my-3" />
+
+      {menuRoutes.map((route, index) => (
+        <MenuItem
+          key={route.title}
+          title={route.title}
+          icon={route.icon}
+          name={route.name}
+          isFirst={index === 0}
+          isLast={index === menuRoutes.length - 1}
+        />
+      ))}
     </ThemedView>
   );
 }
