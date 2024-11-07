@@ -8,16 +8,13 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Text, View } from "react-native";
-
-import "react-native-reanimated";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
-
-import "../global.css";
+import { allRoutes } from "@/constants/Routes";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { ThemedView } from "@/presentation/shared/ThemedView";
-import { ThemedText } from "@/presentation/shared/ThemedText";
+
+import "react-native-reanimated";
+import "../global.css";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -44,13 +41,36 @@ export default function RootLayout() {
       style={{ flex: 1, backgroundColor: backgroundColor }}
     >
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        {/* <Stack> */}
-        <ThemedView margin>
-          <ThemedText className="mt-20" type="h1">
-            Hello
-          </ThemedText>
-        </ThemedView>
-        {/* </Stack> */}
+        <Stack
+          screenOptions={{
+            headerShadowVisible: false,
+            contentStyle: {
+              backgroundColor: backgroundColor,
+            },
+            headerStyle: {
+              backgroundColor: backgroundColor,
+            },
+          }}
+        >
+          <Stack.Screen
+            name="index"
+            options={{
+              title: "",
+            }}
+          />
+
+          {allRoutes.map((route) => {
+            return (
+              <Stack.Screen
+                key={route.name}
+                name={route.name}
+                options={{
+                  title: route.title,
+                }}
+              />
+            );
+          })}
+        </Stack>
       </ThemeProvider>
     </GestureHandlerRootView>
   );
