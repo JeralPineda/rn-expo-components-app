@@ -17,6 +17,7 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 import "../global.css";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { ThemedView } from "@/presentation/shared/ThemedView";
+import { ThemedText } from "@/presentation/shared/ThemedText";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -45,9 +46,9 @@ export default function RootLayout() {
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         {/* <Stack> */}
         <ThemedView margin>
-          <Text className="p-5 text-3xl text-light-primary dark:text-dark-primary">
+          <ThemedText className="mt-20" type="h1">
             Hello
-          </Text>
+          </ThemedText>
         </ThemedView>
         {/* </Stack> */}
       </ThemeProvider>
