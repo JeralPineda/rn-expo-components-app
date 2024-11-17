@@ -15,6 +15,7 @@ import { useThemeColor } from "@/hooks/useThemeColor";
 
 import "react-native-reanimated";
 import "../global.css";
+import { ThemeChangerProvider } from "@/presentation/context/theme-changer-context";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -40,7 +41,8 @@ export default function RootLayout() {
     <GestureHandlerRootView
       style={{ flex: 1, backgroundColor: backgroundColor }}
     >
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <ThemeChangerProvider>
+        {/* <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}> */}
         <Stack
           screenOptions={{
             headerShadowVisible: false,
@@ -72,7 +74,8 @@ export default function RootLayout() {
             );
           })}
         </Stack>
-      </ThemeProvider>
+        {/* </ThemeProvider> */}
+      </ThemeChangerProvider>
     </GestureHandlerRootView>
   );
 }
